@@ -8,6 +8,9 @@ class Game2048(QWidget):
         self.setWindowTitle('2048')
         self.show()
 
+class BLOCK:
+    arr = [[0]*5 for idx in range(5)]
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = Game2048()
