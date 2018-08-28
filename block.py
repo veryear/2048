@@ -1,4 +1,6 @@
 
+# block class
+# Don't change block value!!
 class BLOCK:
     CONST_2 = 2
     CONST_4 = 4
