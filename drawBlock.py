@@ -1,8 +1,7 @@
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QPainter, QFont
-from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPainter, QFont, QTextOption
+from PyQt5.QtCore import Qt, QRectF
 from block import BLOCK_ARRAY, COLOR
-from PyQt5.QtGui import QColor
 
 class Game2048(QMainWindow):
 
@@ -50,26 +49,23 @@ class DrawBlock(QWidget, BLOCK_ARRAY):
     def paintEvent(self, event):
         qp = QPainter(self)
 
-        # edge color
-        qp.setPen(Qt.white)
-
-        # fill color
-        qp.setBrush(Qt.darkRed)
-
         # set font
-        # font = QFont("test")
-        # font.setPointSize(12)
-        # qp.setFont(font)
-        # qp.drawText("test")
+        font = QFont()
+        font.setPointSize(30)
+        qp.setFont(font)
 
-        ind = 1
+        # set font align center
+        textOption = QTextOption()
+        textOption.setAlignment(Qt.AlignCenter)
 
         # draw 4x4 block rectangle
         for i in range(0, 4):
             for j in range(0, 4):
-                if ind >= 2048:
-                    ind = 1
-                ind *= 2
-                self.blocks[j][i].value = ind
-                qp.setBrush(self.COLOR.FILLS[self.blocks[j][i].value])
-                qp.drawRect(self.BLOCK_SIZE*j, self.BLOCK_SIZE*i, self.BLOCK_SIZE, self.BLOCK_SIZE)
+                value = self.blocks[j][i].value # block value
+                qp.setPen(Qt.white)  # set edge color
+                qp.setBrush(self.COLOR.FILLS[value]) # set rect fill color
+                rect = QRectF(self.BLOCK_SIZE*j, self.BLOCK_SIZE*i, self.BLOCK_SIZE, self.BLOCK_SIZE) # set rect
+                qp.drawRect(rect) # draw rect
+                if value != 0:
+                    qp.setPen(self.COLOR.FONTS[value]) # set font color
+                    qp.drawText(rect, str(value), textOption) # in rect draw value text

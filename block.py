@@ -12,11 +12,28 @@ class BLOCK_ARRAY:
 
 class COLOR:
 
-    FILLS = {}
+    FONTS = {} # font color
+    FILLS = {} # rect fill color
 
     def __init__(self):
 
-        self.FILLS[0] = QColor(255, 255, 255)
+        WHITE = QColor(255, 255, 255)
+        BLACK = QColor(0, 0, 0)
+
+        self.FONTS[0] = BLACK
+        self.FONTS[2] = BLACK
+        self.FONTS[4] = BLACK
+        self.FONTS[8] = WHITE
+        self.FONTS[16] = WHITE
+        self.FONTS[32] = WHITE
+        self.FONTS[64] = WHITE
+        self.FONTS[128] = WHITE
+        self.FONTS[256] = WHITE
+        self.FONTS[512] = WHITE
+        self.FONTS[1024] = WHITE
+        self.FONTS[2048] = WHITE
+
+        self.FILLS[0] = QColor(200, 200, 200)
         self.FILLS[2] = QColor(253, 247, 234)
         self.FILLS[4] = QColor(246, 223, 170)
         self.FILLS[8] = QColor(237, 190, 86)
