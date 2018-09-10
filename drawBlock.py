@@ -47,7 +47,7 @@ class DrawBlock(QWidget):
         # draw 4x4 block rectangle
         for y in range(0, 4):
             for x in range(0, 4):
-                value = BLOCK_ARRAY.blocks[x, y].value # block value
+                value = BLOCK_ARRAY.blocks[x][y].value # block value
                 qp.setPen(COLOR_CONSTANTS.WHITE)  # set edge color
                 qp.setBrush(COLOR_CONSTANTS.FILLS[value]) # set rect fill color
                 rect = QRectF(SIZE_CONSTANTS.BLOCK_SIZE*x, SIZE_CONSTANTS.BLOCK_SIZE*y, SIZE_CONSTANTS.BLOCK_SIZE, SIZE_CONSTANTS.BLOCK_SIZE) # set rect
@@ -70,8 +70,8 @@ class DrawBlock(QWidget):
 
         if(nx < 0 or 4 <= nx or ny < 0 or 4 <= ny):
             raise Exception("out of range")
-        BLOCK_ARRAY.blocks[nx, ny].value = BLOCK_ARRAY.blocks[x, y].value
-        BLOCK_ARRAY.blocks[x, y].value = 0
+        BLOCK_ARRAY.blocks[nx][ny].value = BLOCK_ARRAY.blocks[x][y].value
+        BLOCK_ARRAY.blocks[x][y].value = 0
         
         # TODO 새로운 블럭들 그려주는 함수 추가
 
