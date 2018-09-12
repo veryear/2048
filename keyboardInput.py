@@ -1,19 +1,15 @@
-import keyboard #Using module keyboard
+import keyboard
+from constants import DIRECT_CONSTANTS
+
 class KeyboardInput:
-    def right(self):
-        print('right')
-
-    def left(self):
-        print('left')
-
-    def up(self):
-        print('up')
-
-    def down(self):
-        print('down')
 
     def getKey(self):
-
-        while True:  # making a loop
-            if keyboard.is_pressed(keyboard.KEY_UP):  # if key 'q' is pressed
-                 return keyboard.KEY_UP
+        while True:
+            if keyboard.is_pressed('up'):
+                 return DIRECT_CONSTANTS.UP
+            elif keyboard.is_pressed('down'):
+                 return DIRECT_CONSTANTS.DOWN
+            elif keyboard.is_pressed('left'):
+                 return DIRECT_CONSTANTS.LEFT
+            elif keyboard.is_pressed('right'):
+                 return DIRECT_CONSTANTS.RIGHT
