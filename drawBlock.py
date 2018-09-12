@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPainter, QFont, QTextOption
 from PyQt5.QtCore import Qt, QRectF
 from block import BLOCK_ARRAY, COLOR
+from keyboardInput import KeyboardInput
 
 class Game2048(QMainWindow):
 
@@ -11,6 +12,7 @@ class Game2048(QMainWindow):
     WINDOW_HEIGHT = 800
 
     blockArray = BLOCK_ARRAY()
+    keyboardInput = KeyboardInput()
 
     def __init__(self):
         super().__init__()
@@ -23,6 +25,7 @@ class Game2048(QMainWindow):
         self.initGameScreen()
         # show UI
         self.show()
+        self.playGame()
 
     def initGameScreen(self):
 
@@ -39,6 +42,10 @@ class Game2048(QMainWindow):
 
     def initGameSetting(self):
         self.blockArray = BLOCK_ARRAY()
+
+    def playGame(self):
+        key = self.keyboardInput.getKey()
+        print(key)
 
 class DrawBlock(QWidget, BLOCK_ARRAY):
 
