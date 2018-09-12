@@ -5,11 +5,11 @@ from block import *
 from constants import *
 from keyboardInput import KeyboardInput
 
-class Game2048(QMainWindow):
+class Game2048(object):
 
     keyboardInput = KeyboardInput()
 
-    def __init__(self):
+    def setUp(self, MainWindow):
         super().__init__()
         # set window
         self.setGeometry(SIZE_CONSTANTS.WINDOW_LEFT, SIZE_CONSTANTS.WINDOW_TOP, SIZE_CONSTANTS.WINDOW_WIDTH, SIZE_CONSTANTS.WINDOW_HEIGHT)
@@ -18,7 +18,6 @@ class Game2048(QMainWindow):
         self.initGameScreen()
         # show UI
         self.show()
-        #self.playGame()
 
     def initGameScreen(self):
 
@@ -29,12 +28,14 @@ class Game2048(QMainWindow):
         self.setPalette(p)
 
         # draw 4x4 block
-        drawBlock = DrawBlock(self)
-        drawBlock.drawBlocks()
+        self.drawBlock = DrawBlock(self)
+        self.drawBlock.drawBlocks()
 
-    def playGame(self):
-        key = self.keyboardInput.getKey()
-        print(key)
+    def keyPressEvent(self, event):
+        key = self.keyboardInput.getKey(event.key())
+        # TODO 키보드 입력에 맞게 로직 태우기 -> 알고리즘 부분에서 사용해주세요
+        # if(key != DIRECT_CONSTANTS.NONE):
+        #     self.drawBlock.moveBlock(key, x, y)
 
 class DrawBlock(QWidget):
 
@@ -78,7 +79,6 @@ class DrawBlock(QWidget):
             raise Exception("out of range")
         BLOCK_ARRAY.blocks[nx][ny].value = BLOCK_ARRAY.blocks[x][y].value
         BLOCK_ARRAY.blocks[x][y].value = 0
-        
-        # TODO 새로운 블럭들 그려주는 함수 추가
 
+        # TODO 다른 창에 포커싱안해도 화면 갱신하는 함수 추가
 

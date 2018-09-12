@@ -36,10 +36,11 @@ class COLOR_CONSTANTS:
 
 class DIRECT_CONSTANTS:
 
-    UP = 0;
-    RIGHT = 1;
-    DOWN = 2;
-    LEFT = 3;
+    NONE = -1
+    UP = 0
+    RIGHT = 1
+    DOWN = 2
+    LEFT = 3
 
     # 시계방향. (UP, RIGHT, DOWN, LEFT)
     DX = [0, 1, 0, -1] # column
