@@ -5,14 +5,15 @@ from block import *
 from constants import *
 from keyboardInput import KeyboardInput
 
-class Game2048(object):
 
+class Game2048(object):
     keyboardInput = KeyboardInput()
 
     def setUp(self, MainWindow):
         super().__init__()
         # set window
-        self.setGeometry(SIZE_CONSTANTS.WINDOW_LEFT, SIZE_CONSTANTS.WINDOW_TOP, SIZE_CONSTANTS.WINDOW_WIDTH, SIZE_CONSTANTS.WINDOW_HEIGHT)
+        self.setGeometry(SIZE_CONSTANTS.WINDOW_LEFT, SIZE_CONSTANTS.WINDOW_TOP, SIZE_CONSTANTS.WINDOW_WIDTH,
+                         SIZE_CONSTANTS.WINDOW_HEIGHT)
         self.setWindowTitle('2048')
         # set game screen
         self.initGameScreen()
@@ -20,11 +21,10 @@ class Game2048(object):
         self.show()
 
     def initGameScreen(self):
-
         # set bg color
         self.setAutoFillBackground(True)
         p = self.palette()  # palette
-        p.setColor(self.backgroundRole(), Qt.white) # color white into bg
+        p.setColor(self.backgroundRole(), Qt.white)  # color white into bg
         self.setPalette(p)
 
         # draw 4x4 block
@@ -36,6 +36,7 @@ class Game2048(object):
         # TODO 키보드 입력에 맞게 로직 태우기 -> 알고리즘 부분에서 사용해주세요
         # if(key != DIRECT_CONSTANTS.NONE):
         #     self.drawBlock.moveBlock(key, x, y)
+
 
 class DrawBlock(QWidget):
 
@@ -54,18 +55,19 @@ class DrawBlock(QWidget):
         # draw 4x4 block rectangle
         for y in range(0, 4):
             for x in range(0, 4):
-                value = BLOCK_ARRAY.blocks[x][y].value # block value
+                value = BLOCK_ARRAY.blocks[x][y].value  # block value
                 qp.setPen(COLOR_CONSTANTS.WHITE)  # set edge color
-                qp.setBrush(COLOR_CONSTANTS.FILLS[value]) # set rect fill color
-                rect = QRectF(SIZE_CONSTANTS.BLOCK_SIZE*x, SIZE_CONSTANTS.BLOCK_SIZE*y, SIZE_CONSTANTS.BLOCK_SIZE, SIZE_CONSTANTS.BLOCK_SIZE) # set rect
-                qp.drawRect(rect) # draw rect
+                qp.setBrush(COLOR_CONSTANTS.FILLS[value])  # set rect fill color
+                rect = QRectF(SIZE_CONSTANTS.BLOCK_SIZE * x, SIZE_CONSTANTS.BLOCK_SIZE * y, SIZE_CONSTANTS.BLOCK_SIZE,
+                              SIZE_CONSTANTS.BLOCK_SIZE)  # set rect
+                qp.drawRect(rect)  # draw rect
                 if value != 0:
-                    qp.setPen(COLOR_CONSTANTS.FONTS[value]) # set font color
-                    qp.drawText(rect, str(value), textOption) # in rect draw value text
+                    qp.setPen(COLOR_CONSTANTS.FONTS[value])  # set font color
+                    qp.drawText(rect, str(value), textOption)  # in rect draw value text
 
     def drawBlocks(self):
-        self.move(50, SIZE_CONSTANTS.WINDOW_HEIGHT / 2 - SIZE_CONSTANTS.BLOCK_SIZE*2)
-        self.resize(SIZE_CONSTANTS.BLOCK_SIZE*4, SIZE_CONSTANTS.BLOCK_SIZE*4)
+        self.move(50, SIZE_CONSTANTS.WINDOW_HEIGHT / 2 - SIZE_CONSTANTS.BLOCK_SIZE * 2)
+        self.resize(SIZE_CONSTANTS.BLOCK_SIZE * 4, SIZE_CONSTANTS.BLOCK_SIZE * 4)
 
     # x : column index, y : row index
     # 블럭이 있었던 위치는 0으로 세팅됩니다.
@@ -75,10 +77,9 @@ class DrawBlock(QWidget):
         nx = x + DIRECT_CONSTANTS.DX[int(direct)]
         ny = y + DIRECT_CONSTANTS.DY[int(direct)]
 
-        if(nx < 0 or 4 <= nx or ny < 0 or 4 <= ny):
+        if (nx < 0 or 4 <= nx or ny < 0 or 4 <= ny):
             raise Exception("out of range")
         BLOCK_ARRAY.blocks[nx][ny].value = BLOCK_ARRAY.blocks[x][y].value
         BLOCK_ARRAY.blocks[x][y].value = 0
 
         # TODO 다른 창에 포커싱안해도 화면 갱신하는 함수 추가
-
