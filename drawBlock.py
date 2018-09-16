@@ -35,7 +35,7 @@ class Game2048(object):
         key = self.keyboardInput.getKey(event.key())
         # TODO 키보드 입력에 맞게 로직 태우기 -> 알고리즘 부분에서 사용해주세요
         # if(key != DIRECT_CONSTANTS.NONE):
-        #     self.drawBlock.moveBlock(key, x, y)
+        #     self.drawBlock.moveBlock(key, x, y, 새로운블럭값(value))
 
 
 class DrawBlock(QWidget):
@@ -73,13 +73,14 @@ class DrawBlock(QWidget):
     # 블럭이 있었던 위치는 0으로 세팅됩니다.
     # 블럭이 움직이고자 하는 위치에 블럭이 있다면 해당 블럭은 무시되고 새로운 블럭으로 세팅됩니다.
     # (움직이고자 하는 위치에 블럭이 있는건 별도로 체크하지 않는다)
-    def moveBlock(self, direct, x, y):
+    # value 값으로 블럭을 그려줍니다.
+    def moveBlock(self, direct, x, y, value):
         nx = x + DIRECT_CONSTANTS.DX[int(direct)]
         ny = y + DIRECT_CONSTANTS.DY[int(direct)]
 
         if (nx < 0 or 4 <= nx or ny < 0 or 4 <= ny):
             raise Exception("out of range")
-        BLOCK_ARRAY.blocks[nx][ny].value = BLOCK_ARRAY.blocks[x][y].value
+        BLOCK_ARRAY.blocks[nx][ny].value = value
         BLOCK_ARRAY.blocks[x][y].value = 0
 
         # TODO 다른 창에 포커싱안해도 화면 갱신하는 함수 추가
