@@ -32,10 +32,10 @@ class Game2048(object):
         self.drawBlock.drawBlocks()
 
     def keyPressEvent(self, event):
-        key = self.keyboardInput.getKey(event.key())
+        direct = self.keyboardInput.getKey(event.key())
         # TODO 키보드 입력에 맞게 로직 태우기 -> 알고리즘 부분에서 사용해주세요
-        # if(key != DIRECT_CONSTANTS.NONE):
-        #     self.drawBlock.moveBlock(key, x, y, 새로운블럭값(value))
+        # if(direct != DIRECT_CONSTANTS.NONE):
+        #     self.drawBlock.moveBlock(direct, x, y, 새로운블럭값(value))
 
 
 class DrawBlock(QWidget):
@@ -83,4 +83,4 @@ class DrawBlock(QWidget):
         BLOCK_ARRAY.blocks[nx][ny].value = value
         BLOCK_ARRAY.blocks[x][y].value = 0
 
-        # TODO 다른 창에 포커싱안해도 화면 갱신하는 함수 추가
+        self.update()
