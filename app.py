@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import *
-from drawBlock import Game2048
+from game import Game2048
 
 class MainWindow(QMainWindow, Game2048):
     def __init__(self):
