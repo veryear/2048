@@ -1,7 +1,8 @@
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import *
 from constants import *
 from keyboardInput import KeyboardInput
 from drawBlock import DrawBlock
+
 
 class Game2048(object):
     keyboardInput = KeyboardInput()
@@ -12,12 +13,12 @@ class Game2048(object):
         self.setGeometry(SIZE_CONSTANTS.WINDOW_LEFT, SIZE_CONSTANTS.WINDOW_TOP, SIZE_CONSTANTS.WINDOW_WIDTH,
                          SIZE_CONSTANTS.WINDOW_HEIGHT)
         self.setWindowTitle('2048')
-        # set game screen
-        self.initGameScreen()
+        # init game
+        self.initGame()
         # show UI
         self.show()
 
-    def initGameScreen(self):
+    def initGame(self):
         # set bg color
         self.setAutoFillBackground(True)
         p = self.palette()  # palette
@@ -28,8 +29,18 @@ class Game2048(object):
         self.drawBlock = DrawBlock(self)
         self.drawBlock.drawBlocks()
 
+        # timer
+        self.timer = QTimer(self)
+        self.time = QTime(0, 0, 0)
+        self.timer.timeout.connect(self.updateTime)
+        self.timer.start(1000)
+
     def keyPressEvent(self, event):
         direct = self.keyboardInput.getKey(event.key())
         # TODO 키보드 입력에 맞게 로직 태우기 -> 알고리즘 부분에서 사용해주세요
         # if(direct != DIRECT_CONSTANTS.NONE):
         #     self.drawBlock.moveBlock(direct, x, y, 새로운블럭값(value))
+
+    def updateTime(self):
+        self.time = self.time.addSecs(1)
+        # print(self.time.toString("hh:mm:ss"))
