@@ -1,9 +1,9 @@
 from PyQt5.QtGui import QColor
 
-class COLOR_CONSTANTS:
 
-    FONTS = {} # font color
-    FILLS = {} # rect fill color
+class COLOR_CONSTANTS:
+    FONTS = {}  # font color
+    FILLS = {}  # rect fill color
 
     WHITE = QColor(255, 255, 255)
     BLACK = QColor(0, 0, 0)
@@ -34,8 +34,11 @@ class COLOR_CONSTANTS:
     FILLS[1024] = QColor(27, 86, 184)
     FILLS[2048] = QColor(62, 67, 135)
 
-class DIRECT_CONSTANTS:
+    GAME_INFO_NAME = QColor(210, 117, 117)
+    GAME_INFO_VALUE = QColor(233, 185, 185)
 
+
+class DIRECT_CONSTANTS:
     NONE = -1
     UP = 0
     RIGHT = 1
@@ -43,11 +46,11 @@ class DIRECT_CONSTANTS:
     LEFT = 3
 
     # 시계방향. (UP, RIGHT, DOWN, LEFT)
-    DX = [0, 1, 0, -1] # column
-    DY = [-1, 0, 1, 0] # row
+    DX = [0, 1, 0, -1]  # column
+    DY = [-1, 0, 1, 0]  # row
+
 
 class SIZE_CONSTANTS:
-
     # one block size (150 x 150)
     BLOCK_SIZE = 150
 
