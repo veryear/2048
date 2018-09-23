@@ -4,6 +4,7 @@ from keyboardInput import KeyboardInput
 from drawBlock import DrawBlock
 from gameInfo import GameInfo
 
+
 class Game2048(object):
     keyboardInput = KeyboardInput()
 
@@ -30,10 +31,16 @@ class Game2048(object):
         self.drawBlock = DrawBlock(self)
         self.drawBlock.drawBlocks()
 
-        # timer
+        # timer & score & best
         self.gameInfo = GameInfo(self)
         self.gameInfo.setTimer()
         self.gameInfo.drawBlocks()
+
+        # 값 세팅은 아래와 같이 해주시면 됩니다.
+        # 필요하면 사용하시고 필요없는건 지워주시면 됩니다.
+        # self.gameInfo.setScore(50)
+        # self.gameInfo.setTime(1*60*60 + 59*60 + 52)
+        # self.gameInfo.setBest(2048)
 
     def keyPressEvent(self, event):
         direct = self.keyboardInput.getKey(event.key())
