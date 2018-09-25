@@ -4,6 +4,7 @@ from keyboardInput import KeyboardInput
 from drawBlock import DrawBlock
 from gameInfo import GameInfo
 from randomValue import RandomValue
+from block import *
 
 
 class Game2048(object):
@@ -32,9 +33,9 @@ class Game2048(object):
         self.drawBlock = DrawBlock(self)
         self.drawBlock.drawBlocks()
 
-        # Generate Random Values
+        # Generate 2 Random values
         self.randomValue = RandomValue(self)
-        self.randomValue.GenerValue()
+        self.randomValue.GenerValue(2)
 
         # timer & score & best
         self.gameInfo = GameInfo(self)
@@ -49,3 +50,23 @@ class Game2048(object):
 
     def keyPressEvent(self, event):
         direct = self.keyboardInput.getKey(event.key())
+
+        if (direct != DIRECT_CONSTANTS.NONE):
+            # UP, LEFT -> sort
+            BLOCK_LIST.list1.sort()
+            # DOWN, RIGHT -> reserve
+            if direct == 1 or direct == 2:
+                BLOCK_LIST.list1.reverse()
+
+            list_size = len(BLOCK_LIST.list1)
+            while list_size > 0:
+                # list's front value
+                self.x = int(BLOCK_LIST.list1[0] / 10)
+                self.y = int(BLOCK_LIST.list1[0] % 10)
+                BLOCK_LIST.list1.pop(0)
+
+                self.drawBlock.moveBlock(direct, self.x, self.y, BLOCK_ARRAY.blocks[self.x][self.y].value)
+                list_size -= 1
+
+            # # Generate 1 Random value
+            self.randomValue.GenerValue(1)
