@@ -65,8 +65,9 @@ class Game2048(object):
                 self.y = int(BLOCK_LIST.list1[0] % 10)
                 BLOCK_LIST.list1.pop(0)
 
+                # draw block object
                 self.drawBlock.moveBlock(direct, self.x, self.y, BLOCK_ARRAY.blocks[self.x][self.y].value)
                 list_size -= 1
 
-            # # Generate 1 Random value
+            # Generate 1 Random value
             self.randomValue.GenerValue(1)
