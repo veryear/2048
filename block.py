@@ -11,9 +11,3 @@ class BLOCK_ARRAY:
     for y in range(0, 4):
         for x in range(0, 4):
             blocks[x][y] = BLOCK()
-
-
-# BLOCK list
-class BLOCK_LIST:
-    # list는 값 = (x좌표 * 10) + y좌표
-    list1 = []
