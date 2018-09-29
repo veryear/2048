@@ -1,3 +1,7 @@
+from PyQt5.QtWidgets import *
+from random import *
+
+
 # BLOCK class
 class BLOCK:
     value = 0  # block value
@@ -13,7 +17,16 @@ class BLOCK_ARRAY:
             blocks[x][y] = BLOCK()
 
 
-# BLOCK list
-class BLOCK_LIST:
-    # list는 값 = (x좌표 * 10) + y좌표
-    list1 = []
+class RandomBlock(QWidget):
+
+    # Generate Random Values
+    def makeRandomBlock(self):
+        x = 0
+        y = 0
+        cnt = 0
+        while (cnt == 0):
+            x = randrange(0, 4)
+            y = randrange(0, 4)
+            if BLOCK_ARRAY.blocks[x][y].value == 0:
+                BLOCK_ARRAY.blocks[x][y].value = 2
+                cnt += 1
