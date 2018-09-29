@@ -17,9 +17,9 @@ class BLOCK_ARRAY:
             blocks[x][y] = BLOCK()
 
 
+# random block class
 class RandomBlock(QWidget):
-
-    # Generate Random Values
+    # Generate Random Block
     def makeRandomBlock(self):
         x = 0
         y = 0
