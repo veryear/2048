@@ -3,7 +3,7 @@ from constants import *
 from keyboardInput import KeyboardInput
 from drawBlock import DrawBlock
 from gameInfo import GameInfo
-from randomValue import RandomValue
+from block import RandomBlock
 
 
 class Game2048(object):
@@ -32,9 +32,10 @@ class Game2048(object):
         self.drawBlock = DrawBlock(self)
         self.drawBlock.drawBlocks()
 
-        # Generate Random values
-        self.randomValue = RandomValue(self)
-        self.randomValue.GenerValue()
+        # make 2 RandomBlocks
+        self.block = RandomBlock(self)
+        self.block.makeRandomBlock()
+        self.block.makeRandomBlock()
 
         # timer & score & best
         self.gameInfo = GameInfo(self)
