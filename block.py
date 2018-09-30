@@ -19,7 +19,7 @@ class BLOCK_ARRAY:
 
 
 class RandomBlock(QWidget):
-    # Generate Random Values
+    # Make Random Blcok
     def makeRandomBlock(self):
         x = 0
         y = 0
