@@ -6,9 +6,8 @@ from random import *
 class BLOCK:
     value = 0  # block value
 
-    # BLOCK array class
 
-
+# BLOCK array class
 class BLOCK_ARRAY:
     # set BLOCK array 4*4
     blocks = [[BLOCK()] * 4 for i in range(4)]
@@ -18,8 +17,9 @@ class BLOCK_ARRAY:
             blocks[x][y] = BLOCK()
 
 
+# random block class
 class RandomBlock(QWidget):
-    # Make Random Blcok
+    # Make Random Block
     def makeRandomBlock(self):
         x = 0
         y = 0

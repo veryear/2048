@@ -1,4 +1,3 @@
-from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPainter, QFont, QTextOption
 from PyQt5.QtCore import Qt, QRectF
 from block import *
