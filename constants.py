@@ -77,4 +77,4 @@ class CONSTANTS:
 
     class INFO:
         FILE_DIRECT = os.getcwd() + "\\GameInfo"
-        FILE_NAME = "2024_info.txt"
+        FILE_NAME = "2048_info.txt"
