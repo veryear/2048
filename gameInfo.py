@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPainter, QFont, QTextOption
 from PyQt5.QtCore import Qt, QRectF, QTimer, QTime
 from constants import *
+from fileManager import FileManager
 
 
 class GameInfo(QWidget):
@@ -9,6 +10,11 @@ class GameInfo(QWidget):
     timer = QTimer()
     time = QTime(0, 0, 0)
     best = 0
+    fileManager = FileManager()
+    try:
+        best = fileManager.readLineFile(CONSTANTS.INFO.FILE_DIRECT, CONSTANTS.INFO.FILE_NAME)
+    except LookupError:
+        fileManager.writeFile(CONSTANTS.INFO.FILE_DIRECT, CONSTANTS.INFO.FILE_NAME, str(best))
 
     def paintEvent(self, event):
         qp = QPainter(self)
@@ -23,50 +29,50 @@ class GameInfo(QWidget):
         textOption = QTextOption()
         textOption.setAlignment(Qt.AlignCenter)
 
-        qp.setPen(COLOR_CONSTANTS.WHITE)
+        qp.setPen(CONSTANTS.COLOR.WHITE)
 
         # score
-        qp.setBrush(COLOR_CONSTANTS.GAME_INFO_NAME)
-        nameRect = SIZE_CONSTANTS.GAME_INFO_SCORE_NAME
+        qp.setBrush(CONSTANTS.COLOR.GAME_INFO_NAME)
+        nameRect = CONSTANTS.SIZE.GAME_INFO_SCORE_NAME
         qp.drawRect(nameRect)
-        qp.setPen(COLOR_CONSTANTS.WHITE)
+        qp.setPen(CONSTANTS.COLOR.WHITE)
         qp.drawText(nameRect, str('SCORE'), textOption)
 
-        qp.setBrush(COLOR_CONSTANTS.GAME_INFO_VALUE)
-        valueRect = SIZE_CONSTANTS.GAME_INFO_SCORE_VALUE
+        qp.setBrush(CONSTANTS.COLOR.GAME_INFO_VALUE)
+        valueRect = CONSTANTS.SIZE.GAME_INFO_SCORE_VALUE
         qp.drawRect(valueRect)
-        qp.setPen(COLOR_CONSTANTS.WHITE)
+        qp.setPen(CONSTANTS.COLOR.WHITE)
         qp.drawText(valueRect, str(self.score), textOption)
 
         # timer
-        qp.setBrush(COLOR_CONSTANTS.GAME_INFO_NAME)
-        nameRect = SIZE_CONSTANTS.GAME_INFO_TIMER_NAME
+        qp.setBrush(CONSTANTS.COLOR.GAME_INFO_NAME)
+        nameRect = CONSTANTS.SIZE.GAME_INFO_TIMER_NAME
         qp.drawRect(nameRect)
-        qp.setPen(COLOR_CONSTANTS.WHITE)
+        qp.setPen(CONSTANTS.COLOR.WHITE)
         qp.drawText(nameRect, str('TIMER'), textOption)
 
-        qp.setBrush(COLOR_CONSTANTS.GAME_INFO_VALUE)
-        valueRect = SIZE_CONSTANTS.GAME_INFO_TIMER_VALUE
+        qp.setBrush(CONSTANTS.COLOR.GAME_INFO_VALUE)
+        valueRect = CONSTANTS.SIZE.GAME_INFO_TIMER_VALUE
         qp.drawRect(valueRect)
-        qp.setPen(COLOR_CONSTANTS.WHITE)
+        qp.setPen(CONSTANTS.COLOR.WHITE)
         qp.drawText(valueRect, str(self.time.toString("hh:mm:ss")), textOption)
 
         # best
-        qp.setBrush(COLOR_CONSTANTS.GAME_INFO_BEST_NAME)
-        nameRect = SIZE_CONSTANTS.GAME_INFO_BEST_NAME
+        qp.setBrush(CONSTANTS.COLOR.GAME_INFO_BEST_NAME)
+        nameRect = CONSTANTS.SIZE.GAME_INFO_BEST_NAME
         qp.drawRect(nameRect)
-        qp.setPen(COLOR_CONSTANTS.WHITE)
+        qp.setPen(CONSTANTS.COLOR.WHITE)
         qp.drawText(nameRect, str('BEST'), textOption)
 
-        qp.setBrush(COLOR_CONSTANTS.GAME_INFO_BEST_VALUE)
-        valueRect = SIZE_CONSTANTS.GAME_INFO_BEST_VALUE
+        qp.setBrush(CONSTANTS.COLOR.GAME_INFO_BEST_VALUE)
+        valueRect = CONSTANTS.SIZE.GAME_INFO_BEST_VALUE
         qp.drawRect(valueRect)
-        qp.setPen(COLOR_CONSTANTS.WHITE)
+        qp.setPen(CONSTANTS.COLOR.WHITE)
         qp.drawText(valueRect, str(self.best), textOption)
 
     def drawBlocks(self):
-        self.move(SIZE_CONSTANTS.WINDOW_WIDTH / 2 + 100, SIZE_CONSTANTS.WINDOW_HEIGHT / 2 - 250)
-        self.resize(SIZE_CONSTANTS.BLOCK_SIZE * 5, SIZE_CONSTANTS.BLOCK_SIZE * 5)
+        self.move(CONSTANTS.SIZE.WINDOW_WIDTH / 2 + 100, CONSTANTS.SIZE.WINDOW_HEIGHT / 2 - 250)
+        self.resize(CONSTANTS.SIZE.BLOCK_SIZE * 5, CONSTANTS.SIZE.BLOCK_SIZE * 5)
 
     def setTimer(self):
         self.timer.timeout.connect(self.updateTime)
@@ -88,8 +94,13 @@ class GameInfo(QWidget):
     def getScore(self):
         return self.score
 
+    # Best 갱신시 True 반환
     def setBest(self, best):
-        self.best = best
+        if self.best < best:
+            self.best = best
+            self.fileManager.writeFile(CONSTANTS.INFO.FILE_DIRECT, CONSTANTS.INFO.FILE_NAME, str(best))
+            return True
+        return False
 
     def getBest(self):
         return self.best

@@ -1,16 +1,17 @@
 from PyQt5.QtCore import Qt
-from constants import DIRECT_CONSTANTS
+from constants import CONSTANTS
+
 
 class KeyboardInput:
 
     def getKey(self, key):
         if key == Qt.Key_Up:
-            return DIRECT_CONSTANTS.UP
+            return CONSTANTS.DIRECT.UP
         elif key == Qt.Key_Down:
-            return DIRECT_CONSTANTS.DOWN
+            return CONSTANTS.DIRECT.DOWN
         elif key == Qt.Key_Left:
-            return DIRECT_CONSTANTS.LEFT
+            return CONSTANTS.DIRECT.LEFT
         elif key == Qt.Key_Right:
-            return DIRECT_CONSTANTS.RIGHT
+            return CONSTANTS.DIRECT.RIGHT
         else:
-            return DIRECT_CONSTANTS.NONE
+            return CONSTANTS.DIRECT.NONE
