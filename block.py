@@ -23,6 +23,17 @@ class RandomBlock(QWidget):
     def makeRandomBlock(self):
         x = 0
         y = 0
+
+        # check blank block
+        cnt = 0
+        for r in range(0, 4):
+            for c in range(0, 4):
+                if BLOCK_ARRAY.blocks[x][y].value > 0:
+                    cnt += 1
+
+        if cnt == 16:
+            raise Exception("non-blank block")
+
         cnt = 0
         while (cnt == 0):
             x = randrange(0, 4)
