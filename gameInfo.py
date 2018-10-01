@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPainter, QFont, QTextOption
 from PyQt5.QtCore import Qt, QRectF, QTimer, QTime
 from constants import *
+from fileManager import FileManager
 
 
 class GameInfo(QWidget):
@@ -9,6 +10,11 @@ class GameInfo(QWidget):
     timer = QTimer()
     time = QTime(0, 0, 0)
     best = 0
+    fileManager = FileManager()
+    try:
+        best = fileManager.readLineFile(CONSTANTS.INFO.FILE_DIRECT, CONSTANTS.INFO.FILE_NAME)
+    except LookupError:
+        best = 0
 
     def paintEvent(self, event):
         qp = QPainter(self)
@@ -88,8 +94,13 @@ class GameInfo(QWidget):
     def getScore(self):
         return self.score
 
+    # Best 갱신시 True 반환
     def setBest(self, best):
-        self.best = best
+        if self.best < best:
+            self.best = best
+            self.fileManager.writeFile(CONSTANTS.INFO.FILE_DIRECT, CONSTANTS.INFO.FILE_NAME, best)
+            return True
+        return False
 
     def getBest(self):
         return self.best

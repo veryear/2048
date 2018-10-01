@@ -1,5 +1,6 @@
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import QRectF
+import os
 
 
 class CONSTANTS:
@@ -74,5 +75,6 @@ class CONSTANTS:
         GAME_INFO_BEST_VALUE = QRectF(BLOCK_SIZE / 4 * 5, BLOCK_SIZE * 2 + 50, BLOCK_SIZE * (1 + 1 / 4),
                                       BLOCK_SIZE / 4 * 3)
 
-    class GAME:
-        FILE_NAME = "2048_INFO.txt"
+    class INFO:
+        FILE_DIRECT = os.getcwd() + "\\GameInfo"
+        FILE_NAME = "2024_info.txt"

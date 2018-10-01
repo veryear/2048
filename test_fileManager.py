@@ -9,8 +9,8 @@ class TestFileManager(TestCase):
     def test_writeFile(self):
         # given
         nowDir = os.getcwd() + '\\test'
-        fileName = '\\testFileManager.txt'
-        fullFileName = nowDir + fileName
+        fileName = 'testFileManager.txt'
+        fullFileName = nowDir + '\\' + fileName
         content = "test"
 
         # when
@@ -31,8 +31,8 @@ class TestFileManager(TestCase):
     def test_readLineFile(self):
         # given
         nowDir = os.getcwd() + '\\test'
-        fileName = '\\testFileManager.txt'
-        fullFileName = nowDir + fileName
+        fileName = 'testFileManager.txt'
+        fullFileName = nowDir + '\\' + fileName
         content = "test"
 
         f = codecs.open(fullFileName, 'w', encoding='utf8')
