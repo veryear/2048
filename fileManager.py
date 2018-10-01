@@ -5,10 +5,13 @@ class FileManager:
 
     def writeFile(self, fileDirect, fileName, content):
         fullFileName = fileDirect + '\\' + fileName
-        if not os.path.exists(fileDirect):
-            os.makedirs(fileDirect)
-        f = codecs.open(fullFileName, 'w', encoding='utf8')
-        f.write(content)
+        try:
+            if not os.path.exists(fileDirect):
+                os.makedirs(fileDirect)
+            f = codecs.open(fullFileName, 'w', encoding='utf8')
+            f.write(content)
+        except Exception as e:
+            print(e)
         f.close()
 
     # 한 줄만 읽음.

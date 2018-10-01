@@ -14,7 +14,7 @@ class GameInfo(QWidget):
     try:
         best = fileManager.readLineFile(CONSTANTS.INFO.FILE_DIRECT, CONSTANTS.INFO.FILE_NAME)
     except LookupError:
-        best = 0
+        fileManager.writeFile(CONSTANTS.INFO.FILE_DIRECT, CONSTANTS.INFO.FILE_NAME, str(best))
 
     def paintEvent(self, event):
         qp = QPainter(self)
@@ -98,7 +98,7 @@ class GameInfo(QWidget):
     def setBest(self, best):
         if self.best < best:
             self.best = best
-            self.fileManager.writeFile(CONSTANTS.INFO.FILE_DIRECT, CONSTANTS.INFO.FILE_NAME, best)
+            self.fileManager.writeFile(CONSTANTS.INFO.FILE_DIRECT, CONSTANTS.INFO.FILE_NAME, str(best))
             return True
         return False
 
