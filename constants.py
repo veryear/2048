@@ -74,3 +74,7 @@ class SIZE_CONSTANTS:
     GAME_INFO_BEST_NAME = QRectF(BLOCK_SIZE / 2, BLOCK_SIZE * 2 + 50, BLOCK_SIZE / 4 * 3, BLOCK_SIZE / 4 * 3)
     GAME_INFO_BEST_VALUE = QRectF(BLOCK_SIZE / 4 * 5, BLOCK_SIZE * 2 + 50, BLOCK_SIZE * (1 + 1 / 4),
                                   BLOCK_SIZE / 4 * 3)
+
+
+class BLANK_BLOCKS:
+    blank = 0

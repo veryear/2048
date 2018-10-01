@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import *
 from random import *
+from constants import BLANK_BLOCKS
 
 
 # BLOCK class
@@ -21,24 +22,22 @@ class BLOCK_ARRAY:
 class RandomBlock(QWidget):
     # Make Random Block
     def makeRandomBlock(self):
-        x = 0
-        y = 0
-
         # check blank block
         chck = 0
-        for r in range(0, 4):
-            for c in range(0, 4):
-                if BLOCK_ARRAY.blocks[x][y].value == 0:
+        for c in range(0, 4):
+            for r in range(0, 4):
+                if BLOCK_ARRAY.blocks[c][r].value == BLANK_BLOCKS.blank:
                     chck = 1
                     break
             if chck:
                 break
+        # if it has not blank block
         if chck == 0:
-            raise Exception("non-blank block")
+            raise Exception("No blank blocks")
 
         while (1):
             x = randrange(0, 4)
             y = randrange(0, 4)
-            if BLOCK_ARRAY.blocks[x][y].value == 0:
+            if BLOCK_ARRAY.blocks[x][y].value == BLANK_BLOCKS.blank:
                 BLOCK_ARRAY.blocks[x][y].value = 2
                 break
