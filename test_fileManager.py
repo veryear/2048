@@ -30,18 +30,20 @@ class TestFileManager(TestCase):
 
     def test_readLineFile(self):
         # given
-        nowDir = os.getcwd() + '\\test'
+        fileDirect = os.getcwd() + '\\test'
         fileName = 'testFileManager.txt'
-        fullFileName = nowDir + '\\' + fileName
+        fullFileName = fileDirect + '\\' + fileName
         content = "test"
 
+        if not os.path.exists(fileDirect):
+            os.makedirs(fileDirect)
         f = codecs.open(fullFileName, 'w', encoding='utf8')
         f.write(content)
         f.close()
 
         # when
         fileManager = FileManager()
-        resultContent = fileManager.readLineFile(nowDir, fileName)
+        resultContent = fileManager.readLineFile(fileDirect, fileName)
 
         # then
         self.assertEqual(resultContent, content)
