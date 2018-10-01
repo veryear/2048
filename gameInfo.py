@@ -23,50 +23,50 @@ class GameInfo(QWidget):
         textOption = QTextOption()
         textOption.setAlignment(Qt.AlignCenter)
 
-        qp.setPen(COLOR_CONSTANTS.WHITE)
+        qp.setPen(CONSTANTS.COLOR.WHITE)
 
         # score
-        qp.setBrush(COLOR_CONSTANTS.GAME_INFO_NAME)
-        nameRect = SIZE_CONSTANTS.GAME_INFO_SCORE_NAME
+        qp.setBrush(CONSTANTS.COLOR.GAME_INFO_NAME)
+        nameRect = CONSTANTS.SIZE.GAME_INFO_SCORE_NAME
         qp.drawRect(nameRect)
-        qp.setPen(COLOR_CONSTANTS.WHITE)
+        qp.setPen(CONSTANTS.COLOR.WHITE)
         qp.drawText(nameRect, str('SCORE'), textOption)
 
-        qp.setBrush(COLOR_CONSTANTS.GAME_INFO_VALUE)
-        valueRect = SIZE_CONSTANTS.GAME_INFO_SCORE_VALUE
+        qp.setBrush(CONSTANTS.COLOR.GAME_INFO_VALUE)
+        valueRect = CONSTANTS.SIZE.GAME_INFO_SCORE_VALUE
         qp.drawRect(valueRect)
-        qp.setPen(COLOR_CONSTANTS.WHITE)
+        qp.setPen(CONSTANTS.COLOR.WHITE)
         qp.drawText(valueRect, str(self.score), textOption)
 
         # timer
-        qp.setBrush(COLOR_CONSTANTS.GAME_INFO_NAME)
-        nameRect = SIZE_CONSTANTS.GAME_INFO_TIMER_NAME
+        qp.setBrush(CONSTANTS.COLOR.GAME_INFO_NAME)
+        nameRect = CONSTANTS.SIZE.GAME_INFO_TIMER_NAME
         qp.drawRect(nameRect)
-        qp.setPen(COLOR_CONSTANTS.WHITE)
+        qp.setPen(CONSTANTS.COLOR.WHITE)
         qp.drawText(nameRect, str('TIMER'), textOption)
 
-        qp.setBrush(COLOR_CONSTANTS.GAME_INFO_VALUE)
-        valueRect = SIZE_CONSTANTS.GAME_INFO_TIMER_VALUE
+        qp.setBrush(CONSTANTS.COLOR.GAME_INFO_VALUE)
+        valueRect = CONSTANTS.SIZE.GAME_INFO_TIMER_VALUE
         qp.drawRect(valueRect)
-        qp.setPen(COLOR_CONSTANTS.WHITE)
+        qp.setPen(CONSTANTS.COLOR.WHITE)
         qp.drawText(valueRect, str(self.time.toString("hh:mm:ss")), textOption)
 
         # best
-        qp.setBrush(COLOR_CONSTANTS.GAME_INFO_BEST_NAME)
-        nameRect = SIZE_CONSTANTS.GAME_INFO_BEST_NAME
+        qp.setBrush(CONSTANTS.COLOR.GAME_INFO_BEST_NAME)
+        nameRect = CONSTANTS.SIZE.GAME_INFO_BEST_NAME
         qp.drawRect(nameRect)
-        qp.setPen(COLOR_CONSTANTS.WHITE)
+        qp.setPen(CONSTANTS.COLOR.WHITE)
         qp.drawText(nameRect, str('BEST'), textOption)
 
-        qp.setBrush(COLOR_CONSTANTS.GAME_INFO_BEST_VALUE)
-        valueRect = SIZE_CONSTANTS.GAME_INFO_BEST_VALUE
+        qp.setBrush(CONSTANTS.COLOR.GAME_INFO_BEST_VALUE)
+        valueRect = CONSTANTS.SIZE.GAME_INFO_BEST_VALUE
         qp.drawRect(valueRect)
-        qp.setPen(COLOR_CONSTANTS.WHITE)
+        qp.setPen(CONSTANTS.COLOR.WHITE)
         qp.drawText(valueRect, str(self.best), textOption)
 
     def drawBlocks(self):
-        self.move(SIZE_CONSTANTS.WINDOW_WIDTH / 2 + 100, SIZE_CONSTANTS.WINDOW_HEIGHT / 2 - 250)
-        self.resize(SIZE_CONSTANTS.BLOCK_SIZE * 5, SIZE_CONSTANTS.BLOCK_SIZE * 5)
+        self.move(CONSTANTS.SIZE.WINDOW_WIDTH / 2 + 100, CONSTANTS.SIZE.WINDOW_HEIGHT / 2 - 250)
+        self.resize(CONSTANTS.SIZE.BLOCK_SIZE * 5, CONSTANTS.SIZE.BLOCK_SIZE * 5)
 
     def setTimer(self):
         self.timer.timeout.connect(self.updateTime)
