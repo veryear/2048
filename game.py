@@ -13,8 +13,8 @@ class Game2048(object):
         super().__init__()
 
         # set window
-        self.setGeometry(SIZE_CONSTANTS.WINDOW_LEFT, SIZE_CONSTANTS.WINDOW_TOP, SIZE_CONSTANTS.WINDOW_WIDTH,
-                         SIZE_CONSTANTS.WINDOW_HEIGHT)
+        self.setGeometry(CONSTANTS.SIZE.WINDOW_LEFT, CONSTANTS.SIZE.WINDOW_TOP, CONSTANTS.SIZE.WINDOW_WIDTH,
+                         CONSTANTS.SIZE.WINDOW_HEIGHT)
         self.setWindowTitle('2048')
         # init game
         self.initGame()
