@@ -23,16 +23,16 @@ class RandomBlock(QWidget):
     # Make Random Block
     def makeRandomBlock(self):
         # check blank block
-        chck = 0
+        hasBlankBlock = False
         for x in range(0, 4):
             for y in range(0, 4):
                 if BLOCK_ARRAY.blocks[x][y].value == CONSTANTS.BLANK_BLOCKS.blank:
-                    chck = 1
+                    hasBlankBlock = True
                     break
-            if chck:
+            if hasBlankBlock is True:
                 break
         # if it has not blank block
-        if chck == 0:
+        if hasBlankBlock is False:
             raise Exception("No blank blocks")
 
         while (1):
