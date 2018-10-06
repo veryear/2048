@@ -78,3 +78,6 @@ class CONSTANTS:
     class INFO:
         FILE_DIRECT = os.getcwd() + "\\GameInfo"
         FILE_NAME = "2048_info.txt"
+
+    class BLANK_BLOCKS:
+        blank = 0

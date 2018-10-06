@@ -1,4 +1,3 @@
-from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPainter, QFont, QTextOption
 from PyQt5.QtCore import Qt, QRectF
 from block import *
@@ -42,79 +41,12 @@ class DrawBlock(QWidget):
     # (움직이고자 하는 위치에 블럭이 있는건 별도로 체크하지 않는다)
     # value 값으로 블럭을 그려줍니다.
     def moveBlock(self, direct, x, y, value):
+        nx = x + CONSTANTS.DIRECT.DX[int(direct)]
+        ny = y + CONSTANTS.DIRECT.DY[int(direct)]
 
-        flag = 0
-
-        # UP
-        if direct == 0:
-            while y - 1 >= 0:
-                if BLOCK_ARRAY.blocks[x][y - 1].value == 0:
-                    BLOCK_ARRAY.blocks[x][y].value = 0
-                    BLOCK_ARRAY.blocks[x][y - 1].value = value
-
-                elif BLOCK_ARRAY.blocks[x][y - 1].value == value:
-                    BLOCK_ARRAY.blocks[x][y - 1].value = value * 2
-                    BLOCK_ARRAY.blocks[x][y].value = 0
-                    flag = 1
-
-                elif BLOCK_ARRAY.blocks[x][y - 1].value != value:
-                    break
-
-                y -= 1
-
-        # RIGHT
-        elif direct == 1:
-            while x + 1 < 4:
-                if BLOCK_ARRAY.blocks[x + 1][y].value == 0:
-                    BLOCK_ARRAY.blocks[x][y].value = 0
-                    BLOCK_ARRAY.blocks[x + 1][y].value = value
-
-                elif BLOCK_ARRAY.blocks[x + 1][y].value == value:
-                    BLOCK_ARRAY.blocks[x + 1][y].value = value * 2
-                    BLOCK_ARRAY.blocks[x][y].value = 0
-                    flag = 1
-
-                elif BLOCK_ARRAY.blocks[x + 1][y].value != value:
-                    break
-
-                x += 1
-
-        # DOWN
-        elif direct == 2:
-            while y + 1 < 4:
-                if BLOCK_ARRAY.blocks[x][y + 1].value == 0:
-                    BLOCK_ARRAY.blocks[x][y].value = 0
-                    BLOCK_ARRAY.blocks[x][y + 1].value = value
-
-                elif BLOCK_ARRAY.blocks[x][y + 1].value == value:
-                    BLOCK_ARRAY.blocks[x][y + 1].value = value * 2
-                    BLOCK_ARRAY.blocks[x][y].value = 0
-                    flag = 1
-
-                elif BLOCK_ARRAY.blocks[x][y + 1].value != value:
-                    break
-
-                y += 1
-
-        # LEFT
-        elif direct == 3:
-            while x - 1 >= 0:
-                if BLOCK_ARRAY.blocks[x - 1][y].value == 0:
-                    BLOCK_ARRAY.blocks[x][y].value = 0
-                    BLOCK_ARRAY.blocks[x - 1][y].value = value
-
-                elif BLOCK_ARRAY.blocks[x - 1][y].value == value:
-                    BLOCK_ARRAY.blocks[x - 1][y].value = value * 2
-                    BLOCK_ARRAY.blocks[x][y].value = 0
-                    flag = 1
-
-                elif BLOCK_ARRAY.blocks[x - 1][y].value != value:
-                    break
-
-                x -= 1
-
-        BLOCK_LIST.list1.append(x * 10 + y)
-        if flag:
-            BLOCK_LIST.list1.pop()
+        if (nx < 0 or 4 <= nx or ny < 0 or 4 <= ny):
+            raise Exception("out of range")
+        BLOCK_ARRAY.blocks[nx][ny].value = value
+        BLOCK_ARRAY.blocks[x][y].value = 0
 
         self.update()
