@@ -5,7 +5,8 @@ from constants import *
 
 # BLOCK class
 class BLOCK:
-    value = 0  # block value
+    # block value
+    value = 0
 
 
 # BLOCK array class
@@ -20,24 +21,38 @@ class BLOCK_ARRAY:
 
 # random block class
 class RandomBlock(QWidget):
+    # blankBLOCK list
+    blankBlock_list = []
+
+    # # check blank blocks or Not
+    def isBlankBlock(self, x, y):
+        if BLOCK_ARRAY.blocks[x][y].value == CONSTANTS.BLANK_BLOCKS.blank:
+            return True
+        else:
+            return False
+
     # Make Random Block
     def makeRandomBlock(self):
-        # check blank block
-        hasBlankBlock = False
+
+        block = RandomBlock(self)
+
+        # put BLANKBLOCK's (x*10 + y) value in blankBlock_list
         for x in range(0, 4):
             for y in range(0, 4):
-                if BLOCK_ARRAY.blocks[x][y].value == CONSTANTS.BLANK_BLOCKS.blank:
-                    hasBlankBlock = True
-                    break
-            if hasBlankBlock is True:
-                break
-        # if it has not blank block
-        if hasBlankBlock is False:
-            raise Exception("No blank blocks")
+                if block.isBlankBlock(x, y):
+                    RandomBlock.blankBlock_list.append(x * 10 + y)
 
-        while (1):
-            x = randrange(0, 4)
-            y = randrange(0, 4)
-            if BLOCK_ARRAY.blocks[x][y].value == CONSTANTS.BLANK_BLOCKS.blank:
-                BLOCK_ARRAY.blocks[x][y].value = 2
-                break
+        # has not BLANCKBLOCK
+        if len(RandomBlock.blankBlock_list) == 0:
+            # "No blank blocks" message
+            raise Exception("No blank blocks")
+        # has BLANCKBLOCK
+        else:
+            # make random block
+            blankBlock_list_idx = randrange(0, len(RandomBlock.blankBlock_list))
+            x = int(RandomBlock.blankBlock_list[blankBlock_list_idx] / 10)
+            y = int(RandomBlock.blankBlock_list[blankBlock_list_idx] % 10)
+            BLOCK_ARRAY.blocks[x][y].value = 2
+
+            # blankBlock_list's data delete
+            del RandomBlock.blankBlock_list[:]
