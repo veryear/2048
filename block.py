@@ -23,6 +23,7 @@ class BLOCK_ARRAY:
 class RandomBlock(QWidget):
     # blankBLOCK list
     blankBlock_list = []
+    CONST_XY_DIV = 10  # to divide x, y value
 
     # # check blank blocks or Not
     def isBlankBlock(self, x, y):
@@ -34,25 +35,23 @@ class RandomBlock(QWidget):
     # Make Random Block
     def makeRandomBlock(self):
 
-        block = RandomBlock(self)
-
         # put BLANKBLOCK's (x*10 + y) value in blankBlock_list
         for x in range(0, 4):
             for y in range(0, 4):
-                if block.isBlankBlock(x, y):
-                    RandomBlock.blankBlock_list.append(x * 10 + y)
+                if blankBlock_list.isBlankBlock(x, y):
+                    blankBlock_list.append(x * CONST_XY_DIV + y)
 
         # has not BLANCKBLOCK
-        if len(RandomBlock.blankBlock_list) == 0:
+        if len(blankBlock_list) == 0:
             # "No blank blocks" message
             raise Exception("No blank blocks")
         # has BLANCKBLOCK
         else:
             # make random block
-            blankBlock_list_idx = randrange(0, len(RandomBlock.blankBlock_list))
-            x = int(RandomBlock.blankBlock_list[blankBlock_list_idx] / 10)
-            y = int(RandomBlock.blankBlock_list[blankBlock_list_idx] % 10)
+            blankBlock_list_idx = randrange(0, len(blankBlock_list))
+            x = int(blankBlock_list[blankBlock_list_idx] / CONST_XY_DIV)
+            y = int(blankBlock_list[blankBlock_list_idx] % CONST_XY_DIV)
             BLOCK_ARRAY.blocks[x][y].value = 2
 
             # blankBlock_list's data delete
-            del RandomBlock.blankBlock_list[:]
+            del blankBlock_list[:]
